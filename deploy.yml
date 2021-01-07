@@ -17,5 +17,4 @@
     command: chdir=/tmp/dockerdir docker build -t deploy:ansible .
   - name: Run the docker image
     command: docker run -itd -P deploy:ansible
-  - name: Get Selenium Jar
-    git: repo="" dest=/tmp/selenium
+  

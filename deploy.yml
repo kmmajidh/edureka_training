@@ -14,9 +14,9 @@
   - name: Start docker
     service: name=docker state=started
   - name: Get the dockerfile from github
-    git: repo="https://github.com/meerasankarath/dockerfile.git" dest=/tmp/dockerdir
+    git: repo="https://github.com/meerasankarath/dockerfile.git" dest=/
   - name: Build the dockerfile
-    command: docker build -t deploy:ansible -f /tmp/dockerdir/dockerfile
+    command: docker build -t deploy:ansible .
   - name: Run the docker image
     command: docker run -itd -P deploy:ansible
   

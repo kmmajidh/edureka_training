@@ -1,0 +1,55 @@
+    
+node('master')
+{
+        stage('Code Checkout'){
+                git 'https://github.com/meerasankarath/edureka_training.git'
+        }
+        stage('Compile'){
+                sh 'mvn compile'
+        }
+        // stage('CodeReview'){
+        //     agent any
+        //     steps{
+        //         sh 'mvn pmd:pmd'
+        //     }
+        // }
+        stage('UnitTest'){
+                sh 'mvn test'
+        }
+        // stage('MetricCheck'){
+        //     agent any
+        //     steps{
+        //         sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
+        //     }
+        // }
+        
+        stage('Package')
+        {
+                sh 'mvn package'
+                dir('/var/lib/jenkins/workspace/edureka/target')
+                {
+                    stash includes: 'addressbook.war', name: 'addressbook'
+                }
+                node('linuxAgent')
+                {
+                    dir('/home/user1/jenkins_home')
+                    {
+                        unstash 'addressbook'
+                    }
+                }
+        }
+        stage('Deploy')
+        {
+            ansiblePlaybook become: true, credentialsId: 'a69f1335-9e66-4684-88c2-f046729d5b5b', disableHostKeyChecking: true, playbook: 'deploy.yml'
+        }
+        stage('Selenium test')
+        {
+            node('linuxAgent')
+            {
+            git 'https://github.com/meerasankarath/selenium.git'
+            sh 'mvn test'
+            }
+        }
+        
+    
+}

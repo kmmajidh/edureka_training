@@ -9,14 +9,5 @@
     yum: name=maven state=present
   - name: Install Chromium
     yum: name=chromium state=present
-  - name: Install docker
-    yum: name=docker state=present
-  - name: Start docker
-    service: name=docker state=started
-  - name: Get the dockerfile from github
-    git: repo="https://github.com/meerasankarath/dockerfile.git" dest=/tmp/dockerdir
-  - name: Build the dockerfile
-    command: chdir=/tmp/dockerdir docker build -t deploy:ansible .
-  - name: Run the docker image
-    command: docker run -itd -P deploy:ansible
+  
   

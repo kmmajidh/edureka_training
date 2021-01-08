@@ -16,7 +16,7 @@
   - name: Get the dockerfile from github
     git: repo="https://github.com/meerasankarath/dockerfile.git" dest=/tmp/dockerdir 
   - name: Build the dockerfile
-    command: chdir=/tmp/dockerdir docker build -t deploy:ansible1 .
+    command: chdir=/home/user1/jenkins_home docker build -t deploy:ansible1 .
   - name: Run the docker image
     command: docker run -itd -P deploy:ansible1
   

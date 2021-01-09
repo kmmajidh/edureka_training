@@ -1,0 +1,15 @@
+---
+- hosts: prodserver
+  become: true
+  become_user: root
+  tasks:
+  - name: Install Git
+    yum: name=git state=present
+  - name: Install docker
+    yum: name=docker state=present
+  - name: Start docker
+    service: name=docker state=started
+  - name: Pull image
+    command: docker pull meerasankarath/edurekaproject:ansible1
+  - name: Run the docker image
+    command: docker run --name meeraansibleprodcontainer -itd -P meerasankarath/edurekaproject:ansible1

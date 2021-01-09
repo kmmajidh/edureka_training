@@ -9,8 +9,6 @@
     yum: name=maven state=present
   - name: Install Chromium
     yum: name=chromium state=present
-  - name: Install Chromedriver
-    yum: name=chromedriver state=present
   - name: Install docker
     yum: name=docker state=present
   - name: Start docker

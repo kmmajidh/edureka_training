@@ -16,12 +16,11 @@ node('master')
         stage('UnitTest'){
                 sh 'mvn test'
         }
-        // stage('MetricCheck'){
-        //     agent any
-        //     steps{
-        //         sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
-        //     }
-        // }
+        stage('MetricCheck'){
+            
+                sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
+            
+        }
         
         stage('Package')
         {
@@ -47,6 +46,8 @@ node('master')
             node('linuxAgent')
             {
             git 'https://github.com/meerasankarath/selenium.git'
+            sh '''Xvfb :99 -ac -screen 0 1280x1024x24 &
+            nice -n 10 x11vnc 2>&1 &  '''
             sh 'mvn test'
             }
         }

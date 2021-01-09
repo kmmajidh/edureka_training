@@ -18,5 +18,5 @@
   - name: Build the dockerfile
     command: chdir=/home/user1/jenkins_home docker build -t deploy:ansible2 .
   - name: Run the docker image
-    command: docker run --name mycontainer -itd -P deploy:ansible2
+    command: docker run --name meeraansiblecontainer -itd -P deploy:ansible2
   

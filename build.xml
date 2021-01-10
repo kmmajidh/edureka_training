@@ -52,7 +52,7 @@
   	  					 	<property name="actualbuildtype" value="${buildtype}"/>
   					    </else>
   	</if>
-	<echo message="resource dir: ${maven.build.resourceDir}, Source Dir: ${build.basesrcdir}/src/main/java"/>
+   <echo message="resource dir: ${maven.build.resourceDir}, Source Dir: ${build.basesrcdir}/src/main/java"/>
    <property file="${build.basesrcdir}/build.properties"/>
    <artifact:pom id="pom" file="pom.xml" />
    <property name="actualbuildname" value="${pom.artifactId}"/>

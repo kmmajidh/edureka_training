@@ -16,6 +16,7 @@ pipeline{
             agent any
             steps{
                 sh 'mvn compile'
+                sh 'echo hi'
             }
         }
          stage('CodeReview'){
